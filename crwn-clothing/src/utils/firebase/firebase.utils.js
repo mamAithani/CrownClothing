@@ -5,6 +5,7 @@ import { getAuth
         ,signInWithPopup 
         ,createUserWithEmailAndPassword
         ,signInWithEmailAndPassword
+        ,signOut
       } from 'firebase/auth'; 
 
 
@@ -57,11 +58,9 @@ export const createUserDocumentFromAuth = async (userAuth,additionalInformation=
 
       if (!userSnapshot.exists()) {
               try{ 
-                console.log( additionalInformation );
-                console.log ( {displayName, email, createdAt,...additionalInformation});
+                //console.log( additionalInformation );
+                //console.log ( {displayName, email, createdAt,...additionalInformation});
                 await setDoc(userdocRef, {displayName, email, createdAt,...additionalInformation}); //save the doc.
-                console.log( 'hi i am putting display name here please check ');
-                console.log ( displayName);
               } 
               catch(error){ 
                 console.log(error); 
@@ -80,4 +79,6 @@ export const signIn = async(email, password) => {
   return await signInWithEmailAndPassword( auth, email, password); 
 };
 
+
+export const signOutUser =async () => await signOut(auth);
 

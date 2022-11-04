@@ -1,8 +1,10 @@
 import { Register, createUserDocumentFromAuth}  from '../../utils/firebase/firebase.utils';
-import { useState } from "react";
+import { useState, useContext } from "react";
 import './sign-up.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
+import { UserContext } from '../../contexts/user.context';
+
 
 const defaultFormFields = {
     displayName: ''
@@ -13,15 +15,17 @@ const defaultFormFields = {
 
 const SignUp = () => {
 
-    console.log('render');
+    console.log('render sign up ');
     const [formFields, setFormFields] = useState(defaultFormFields); 
     const {displayName, email , password , confirmPassword} = formFields; 
+    const { setCurrentUser}  = useContext(UserContext);
     
     const onSubmitHandler = async (event) => {
         event.preventDefault(); //prevent refresh
 
         try {
-            const { user } = await Register(email, password);             
+            const { user } = await Register(email, password);     
+            setCurrentUser( user);         
             const docref = await createUserDocumentFromAuth(user, { displayName} );            
         } 
         catch(error){
@@ -42,7 +46,7 @@ const SignUp = () => {
                 <FormInput label="Display Name" type="text" name="displayName" required onChange={onChangeHandler} value={displayName}/>                    
                 <FormInput label="Email" type="text" name="email" required onChange={onChangeHandler} value={email}/>                    
                 <FormInput label="Password" type="passsword" name="password" required onChange={onChangeHandler} value={password}/>
-                <FormInput label="Confirm Password" type="passsword" name="confirmpassword" required onChange={onChangeHandler} value={confirmPassword}/>
+                <FormInput label="Confirm Password" type="passsword" name="confirmPassword" required onChange={onChangeHandler} value={confirmPassword}/>
                 <Button type="submit" children='Sign Up'/>
             </form> 
         </div>

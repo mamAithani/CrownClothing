@@ -1,22 +1,29 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {signInWithGooglePopUp,signIn} from '../../utils/firebase/firebase.utils.js' 
 import { createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils.js'; 
 import FormInput from '../form-input/form-input.component.jsx';
 import './sign-in.styles.scss'
 import Button from '../button/button.component.jsx';
+import { UserContext } from '../../contexts/user.context.js';
 
 const defaultFields= {
      email:''
     ,password:''    
 };
 const SignIn = () => {
+
+    console.log( 'render sign in  ');
     const [formFields, setFormFields] = useState(defaultFields);
     const {email, password}= formFields; 
+    const {setCurrentUser} = useContext(UserContext);
+
     const onSubmitHandler = async(event) =>{
         event.preventDefault();
-        const response = await signIn(formFields.email, formFields.password);
+        const {user} = await signIn(formFields.email, formFields.password);
 
-        console.log( 'sign in success ');
+        setCurrentUser( user );
+
+        console.log('sign in success the user.');   
     }
 
     const loginWithGoogle = async () => {
