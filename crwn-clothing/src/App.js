@@ -3,6 +3,7 @@ import Navigation from './routes/navigation/navigation.component';
 import Authentication from './routes/authentication/authentication.component';
 import {Routes, Route} from 'react-router-dom'; 
 import Shop from './components/shop/shop.component';
+import CheckOut from './routes/checkout/checkout.component';
 
 
 const App = () => {   
@@ -13,6 +14,9 @@ const App = () => {
                     </Route>
 
                      <Route path='/Shop' element={ <Shop/>}>
+                     </Route>   
+
+                     <Route path='/CheckOut' element={ <CheckOut/>}>
                      </Route>     
 
                      <Route path='/Authentication' element={ <Authentication/>}>
