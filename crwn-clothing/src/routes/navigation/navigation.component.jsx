@@ -15,13 +15,13 @@ const Navigation = ()  => {
     const {currentUser} = useContext(UserContext); 
     const {isCartOpen} = useContext(CartContext); 
 
-    console.log( isCartOpen); 
+    //console.log( isCartOpen); 
    
     const signOutUserHandler = async() => {
         await signOutUser();          
     }
 
-    console.log( currentUser);
+    //console.log( currentUser);
     return (
             <div>
                 <div className="navigation">      
@@ -32,14 +32,12 @@ const Navigation = ()  => {
                         <Link className='nav-link' to='/'>Home</Link>
                         <Link className='nav-link' to='/Shop'>Shop</Link>
                         { 
-                            
                             currentUser ? (
                                 <Link className='nav-link' onClick={signOutUserHandler}>Sign Out</Link>
 
                             ) : (
                                 <Link className='nav-link' to='/Authentication'>Sign In</Link>
-                            )
-                        
+                            )                        
                         }
                          <CartIcon/>
                     </div>  
