@@ -1,4 +1,6 @@
-.directory-item-container {
+import styled from 'styled-components';
+
+export const DirectoryItemContainer = styled.div`
     min-width: 30%;
     height: 240px;
     flex: 1 1 auto;
@@ -32,16 +34,18 @@
   
     &:last-child {
       margin-left: 7.5px;
-    }
-  
-    .background-image {
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-    }
-  
-    .body {
+    }  
+`
+
+export const BackgroundImage = styled.div`
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
+`;
+
+export const BodyContainer =styled.div`
       height: 90px;
       padding: 0 25px;
       display: flex;
@@ -64,5 +68,4 @@
         font-weight: lighter;
         font-size: 16px;
       }
-    }
-  }
+`
